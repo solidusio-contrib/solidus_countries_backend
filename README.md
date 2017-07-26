@@ -15,8 +15,10 @@ Important Note
 --------------
 
 Solidus will remove support for changing countries and states since they
-will not be stored anymore in the database. Solidus will slowly migrate to [Carmen](https://github.com/jim/carmen) and this is part of the
-migration process so **it is recommended not to use this extension**.
+will not be stored anymore in the database; in fact Solidus will slowly
+migrate to [Carmen](https://github.com/jim/carmen). Extracting this core
+functionality into an external gem is part of the migration process so **it is
+recommended not to use this extension**.
 
 Installation
 ------------
