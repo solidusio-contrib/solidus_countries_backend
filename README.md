@@ -1,7 +1,20 @@
 SolidusCountriesBackend
 =======================
 
-Introduction goes here.
+**WIP**: This extension is not ready yet. Do not use it until the pull
+request below has been merged.
+
+Add an admin UI to Solidus for managing countries and states.
+
+This functionality has been removed from Solidus core with
+[#2118](https://github.com/solidusio/solidus/pull/2118).
+
+Important Note
+--------------
+
+Solidus will remove support for changing countries and states since they
+will not be stored anymore in the database. Solidus will slowly migrate to [Carmen](https://github.com/jim/carmen) and this is part of the
+migration process so **it is recommended not to use this extension**.
 
 Installation
 ------------
@@ -36,4 +49,4 @@ Simply add this require statement to your spec_helper:
 require 'solidus_countries_backend/factories'
 ```
 
-Copyright (c) 2017 [name of extension creator], released under the New BSD License
+Copyright (c) 2017 [contributors](https://github.com/solidusio-contrib/solidus_countries_backend/graphs/contributors), released under the New BSD License
