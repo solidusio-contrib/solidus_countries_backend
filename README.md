@@ -1,6 +1,8 @@
 SolidusCountriesBackend
 =======================
 
+[![Build Status](https://travis-ci.org/solidusio-contrib/solidus_countries_backend.svg?branch=master)](https://travis-ci.org/solidusio-contrib/solidus_countries_backend)
+
 **WIP**: This extension is not ready yet. Do not use it until the pull
 request below has been merged.
 
