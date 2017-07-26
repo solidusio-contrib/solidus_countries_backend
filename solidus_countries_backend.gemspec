@@ -5,13 +5,12 @@ require 'solidus_countries_backend/version'
 Gem::Specification.new do |s|
   s.name        = 'solidus_countries_backend'
   s.version     = SolidusCountriesBackend::VERSION
-  s.summary     = 'TODO'
-  s.description = 'TODO'
+  s.summary     = 'Restores backend UI for viewing and changing countries and states'
+  s.description = 'Restores backend UI for viewing and changing countries and states. It is needed after countries and states UI has been removed from core.'
   s.license     = 'BSD-3-Clause'
 
-  # s.author    = 'You'
-  # s.email     = 'you@example.com'
-  # s.homepage  = 'http://www.example.com'
+  s.author    = 'Solidus Team'
+  s.email     = 'contact@solidus.io'
 
   s.files = Dir["{app,config,db,lib}/**/*", 'LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*']
