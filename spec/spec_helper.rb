@@ -25,10 +25,17 @@ Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 
 # Requires factories and other useful helpers defined in spree_core.
 require 'spree/testing_support/authorization_helpers'
-require 'spree/testing_support/capybara_ext'
-require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/factories'
+require 'spree/testing_support/preferences'
+require 'spree/testing_support/controller_requests'
+require 'spree/testing_support/flash'
 require 'spree/testing_support/url_helpers'
+require 'spree/testing_support/order_walkthrough'
+require 'spree/testing_support/capybara_ext'
+
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
+Capybara.exact = true
 
 # Requires factories defined in lib/solidus_countries_backend/factories.rb
 require 'solidus_countries_backend/factories'
@@ -46,6 +53,8 @@ RSpec.configure do |config|
   # visit spree.admin_path
   # current_path.should eql(spree.products_path)
   config.include Spree::TestingSupport::UrlHelpers
+  config.include Spree::TestingSupport::Preferences
+  config.include Spree::TestingSupport::Flash
 
   # == Mock Framework
   #
@@ -65,20 +74,37 @@ RSpec.configure do |config|
   # to setup a test will be unavailable to the browser, which runs under a separate server instance.
   config.use_transactional_fixtures = false
 
-  # Ensure Suite is set to use transactions for speed.
   config.before :suite do
-    DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with :truncation
   end
 
-  # Before each spec check if it is a Javascript test and switch between using database transactions or not where necessary.
-  config.before :each do
-    DatabaseCleaner.strategy = RSpec.current_example.metadata[:js] ? :truncation : :transaction
+  config.when_first_matching_example_defined(type: :feature) do
+    config.before :suite do
+      # Preload assets
+      # This should avoid capybara timeouts, and avoid counting asset compilation
+      # towards the timing of the first feature spec.
+      Rails.application.precompiled_assets
+    end
+  end
+
+  config.prepend_before(:each) do
+    if RSpec.current_example.metadata[:js]
+      DatabaseCleaner.strategy = :truncation
+    else
+      DatabaseCleaner.strategy = :transaction
+    end
     DatabaseCleaner.start
   end
 
-  # After each spec clean the database.
-  config.after :each do
+  config.before do
+    Rails.cache.clear
+    reset_spree_preferences
+    if RSpec.current_example.metadata[:js]
+      page.driver.browser.url_blacklist = ['http://fonts.googleapis.com']
+    end
+  end
+
+  config.append_after(:each) do
     DatabaseCleaner.clean
   end
 
