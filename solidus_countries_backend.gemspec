@@ -16,8 +16,10 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'solidus_core', '~> 2.4.alpha'
+  s.add_dependency "solidus_support", ">= 0.1.3"
 
   s.add_development_dependency 'capybara'
+  s.add_development_dependency "capybara-screenshot"
   s.add_development_dependency 'poltergeist'
   s.add_development_dependency 'coffee-rails'
   s.add_development_dependency 'sass-rails'
