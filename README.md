@@ -8,7 +8,7 @@ request below has been merged.
 
 Add an admin UI to Solidus for managing countries and states.
 
-This functionality has been removed from Solidus core with
+This functionality has been removed from Solidus backend with
 [#2118](https://github.com/solidusio/solidus/pull/2118).
 
 Important Note
