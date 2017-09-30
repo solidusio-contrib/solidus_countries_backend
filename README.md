@@ -3,9 +3,6 @@ SolidusCountriesBackend
 
 [![Build Status](https://travis-ci.org/solidusio-contrib/solidus_countries_backend.svg?branch=master)](https://travis-ci.org/solidusio-contrib/solidus_countries_backend)
 
-**WIP**: This extension is not ready yet. Do not use it until the pull
-request below has been merged.
-
 Add an admin UI to Solidus for managing countries and states.
 
 This functionality has been removed from Solidus backend with
